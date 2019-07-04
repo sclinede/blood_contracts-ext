@@ -1,0 +1,19 @@
+---
+en:
+  bad: Something bad has happened
+  contracts:
+    test/email:
+      invalid_email: Given value is not a valid email
+    test/phone:
+      invalid_phone: Value `%{phone_input}` is not a valid phone
+    test/login:
+      no_matches: Data for login is invalid
+    test/registration_input:
+      invalid_tuple: Data for registration is invalid
+    test/plain_text_error:
+      message: "Service responded with a message: `%{plain_text}`"
+  tram-policy:
+    test/address_policy:
+      invalid_city_name: The value `%{value}` is not a valid city name
+      invalid_country_code: The value `%{value}` is not a valid ISO country code
+      invalid_street: The value `%{value}` is not a valid street
