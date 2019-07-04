@@ -28,7 +28,9 @@ module BloodContracts::Core
     # @return [Refined]
     #
     def match
-      context[:mapped_value] = self.class.mapper_klass.call(**value)
+      context[:mapper_input] = value
+      context[:mapped_value] =
+        self.class.mapper_klass.call(**context[:mapper_input])
       self
     end
 
