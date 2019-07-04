@@ -35,30 +35,32 @@ RSpec.describe "BC::Ext::Refined validation delegated to Tram::Policy" do
 
         def city
           return value.city if value.respond_to?(:city)
-          value.to_h
-               .transform_keys(&:to_s)
-               .values_at("city", "City")
-               .compact
-               .first
+          stringify_hash_keys(value.to_h)
+            .values_at("city", "City")
+            .compact
+            .first
         end
 
         def country
           return value.country if value.respond_to?(:country)
-          value.to_h
-               .transform_keys(&:to_s)
-               .values_at("country", "country_code", "CountryCode")
-               .compact
-               .first
+          stringify_hash_keys(value.to_h)
+            .values_at("country", "country_code", "CountryCode")
+            .compact
+            .first
         end
 
         def street
           return value.street if value.respond_to?(:street)
-          value.to_h
-               .transform_keys(&:to_s)
-               .values_at("street", "street_line", "StreetLine")
-               .compact
-               .first
+          stringify_hash_keys(value.to_h)
+            .values_at("street", "street_line", "StreetLine")
+            .compact
+            .first
         end
+
+        private def stringify_hash_keys(hash)
+          hash.reduce({}) { |a, (k, v)| a.merge!(k.to_s => v) }
+        end
+
       end
 
       Address = Struct.new(:country, :city, :street)

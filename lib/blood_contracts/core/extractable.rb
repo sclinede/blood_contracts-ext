@@ -51,7 +51,8 @@ module BloodContracts::Core
     #
     # @return [Hash]
     def mapped
-      @context.slice(*self.class.extractors.keys)
+      keys = self.class.extractors.keys
+      Hash[keys.zip(@context.values_at(*keys))]
     end
 
     # Extracts data from the value
@@ -74,7 +75,7 @@ module BloodContracts::Core
     protected def policy_failure_match!
       return unless self.class.policy
 
-      policy_input = context.transform_keys(&:to_sym)
+      policy_input = context.reduce({}) { |a, (k, v)| a.merge!(k.to_sym => v) }
       policy_instance = self.class.policy[**policy_input]
       return if policy_instance.valid?
 

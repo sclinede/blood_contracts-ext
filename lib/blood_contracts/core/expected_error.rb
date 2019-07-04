@@ -7,7 +7,8 @@ module BloodContracts::Core
     #
     # @return [Tram::Policy::Errors]
     def mapped
-      tags = @context.slice(*self.class.extractors.keys)
+      keys = self.class.extractors.keys
+      tags = Hash[keys.zip(@context.values_at(*keys))]
       tags = @context if tags.empty?
       self.class.define_error(:message, tags: tags)
     end
