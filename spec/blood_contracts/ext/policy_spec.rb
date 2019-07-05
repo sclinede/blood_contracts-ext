@@ -60,7 +60,6 @@ RSpec.describe "BC::Ext::Refined validation delegated to Tram::Policy" do
         private def stringify_hash_keys(hash)
           hash.reduce({}) { |a, (k, v)| a.merge!(k.to_s => v) }
         end
-
       end
 
       Address = Struct.new(:country, :city, :street)
