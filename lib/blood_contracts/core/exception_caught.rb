@@ -6,7 +6,7 @@ module BloodContracts::Core
     # @param value [Exception] value which is wrapped inside the type
     # @option context [Hash] shared context of types matching pipeline
     #
-    def initialize(value = nil, context: Hash.new { |h, k| h[k] = {} }, **)
+    def initialize(value = nil, context: {}, **)
       @errors = []
       @context = context
       @value = value

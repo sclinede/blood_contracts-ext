@@ -28,6 +28,8 @@ module BloodContracts::Core
 
       # @private
       private def underscore(string)
+        return string.underscore if string.respond_to?(:underscore)
+
         string.gsub(/([A-Z]+)([A-Z])/, '\1_\2')
               .gsub(/([a-z])([A-Z])/, '\1_\2')
               .gsub("__", "/")

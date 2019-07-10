@@ -27,6 +27,14 @@ module BloodContracts::Core
           BC::Ext::Sum.new(self, other_type)
         end
 
+        # Alias for Sum compose
+        # See #or_a
+        alias or_an or_a
+
+        # Alias for Sum compose
+        # See #or_a
+        alias | or_a
+
         # Compose types in a Pipe check
         # Pipe passes data from type to type sequentially
         #
@@ -35,6 +43,10 @@ module BloodContracts::Core
         def and_then(other_type)
           BC::Ext::Pipe.new(self, other_type)
         end
+
+        # Alias for Pipe compose
+        # See #and_then
+        alias > and_then
 
         # @private
         def inherited(new_klass)
