@@ -13,12 +13,20 @@ RSpec.describe BloodContracts::Core::MapValue do
         extend Forwardable
         extract :name
         extract :phone
-        extract :manager_id
 
-        def_delegators :@value, :name, :phone, :manager_id
+        def_delegators :@value, :name, :phone
       end
 
-      ContactJsonType = ContactType.and_then(BC::MapValue.with(JsonMapper))
+      class ContactWithManagerType < ContactType
+        extract :manager_id
+
+        def manager_id
+          value.manager_id
+        end
+      end
+
+      ContactJsonType =
+        ContactWithManagerType.and_then(BC::MapValue.with(JsonMapper))
       Contact = Struct.new(:name, :phone, :manager_id)
     end
   end
