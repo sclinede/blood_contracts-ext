@@ -1,6 +1,6 @@
 Gem::Specification.new do |gem|
   gem.name          = "blood_contracts-ext"
-  gem.version       = "0.1.2"
+  gem.version       = "0.1.3"
   gem.authors       = ["Sergey Dolganov (sclinede)"]
   gem.email         = ["sclinede@evilmartians.com"]
 

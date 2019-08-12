@@ -5,10 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## master
+## [0.1.3] - [2018-07-12]
 
 ### Fixes
 Extractors should be copied during inheritance but children should not be able to modify the parents' @extractors.
+
+## [0.1.2] - [2018-07-18]
+
+### Fixes
+Deep inheritance of BC::Ext::Refined was broken, fixed that
 
 ## [0.1.1] - [2018-07-10]
 
