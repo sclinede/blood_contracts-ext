@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## master
+
+### Fixes
+Extractors should be copied during inheritance but children should not be able to modify the parents' @extractors.
+
 ## [0.1.1] - [2018-07-10]
 
 ### Fixes:

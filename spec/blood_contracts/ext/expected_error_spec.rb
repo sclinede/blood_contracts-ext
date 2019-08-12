@@ -2,11 +2,30 @@ RSpec.describe BloodContracts::Core::ExpectedError do
   before do
     module Test
       class PlainTextError < BC::ExpectedError
+        extract :plain_text
+        extract :parsed, method_name: :parse_json
+
         def match
-          @context[:parsed] ||= JSON.parse(value)
+          extract!
+          nil
         rescue JSON::ParserError
-          @context[:plain_text] = value.to_s
           self
+        end
+
+        def plain_text
+          value.to_s
+        end
+
+        def parse_json
+          JSON.parse(value)
+        end
+      end
+
+      class JustAnotherType < BC::ExpectedError
+        extract :thing
+
+        def thing
+          "THE THING"
         end
       end
 
@@ -26,6 +45,12 @@ RSpec.describe BloodContracts::Core::ExpectedError do
   end
 
   subject { Test::Response.match(value) }
+
+  context "when several types have same parent" do
+    it do
+      expect(Test::JustAnotherType.extractors).to match(thing: [:thing])
+    end
+  end
 
   context "when value is a JSON" do
     let(:value) { '{"name": "Andrew", "registered_at": "2019-01-01"}' }

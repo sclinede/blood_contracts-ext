@@ -22,7 +22,7 @@ module BloodContracts::Core
       # @private
       def inherited(child)
         super
-        child.instance_variable_set(:@extractors, extractors || {})
+        child.instance_variable_set(:@extractors, extractors.dup || {})
       end
 
       # DSL to define which method to use to extract data from the value
