@@ -63,7 +63,6 @@ RSpec.describe BloodContracts::Core::PolicyFailure do
         let(:value) { "tasf" }
         let(:errors_list) do
           [
-            { Test::Login => [kind_of(Tram::Policy::Errors)] },
             { Test::Email => [kind_of(Tram::Policy::Errors)] },
             { Test::Phone => [kind_of(Tram::Policy::Errors)] }
           ]
@@ -88,7 +87,7 @@ RSpec.describe BloodContracts::Core::PolicyFailure do
           expect(subject.errors).to match_array(errors_list)
           expect(subject.policy_errors).to match(policy_errors)
           expect(subject.messages).to match_array(messages)
-          expect(subject.context).to include(validation_context)
+          expect(subject.contexts.reduce(:merge)).to include(validation_context)
         end
       end
     end
@@ -116,15 +115,12 @@ RSpec.describe BloodContracts::Core::PolicyFailure do
         let(:attribute_errors) do
           {
             login: kind_of(BC::PolicyFailure),
-            base: kind_of(BC::TuplePolicyFailure)
           }
         end
         let(:errors) do
           [
             { Test::Email => [kind_of(Tram::Policy::Errors)] },
             { Test::Phone => [kind_of(Tram::Policy::Errors)] },
-            { Test::Login => [kind_of(Tram::Policy::Errors)] },
-            { Test::RegistrationInput => [kind_of(Tram::Policy::Errors)] }
           ]
         end
         let(:attribute_messages) do
@@ -133,14 +129,12 @@ RSpec.describe BloodContracts::Core::PolicyFailure do
               "Given value is not a valid email",
               "Value `admin` is not a valid phone"
             ],
-            base: ["Data for registration is invalid"]
           }
         end
 
         it do
           expect(subject).to be_invalid
           expect(subject.attributes).to match(attributes)
-          expect(subject.to_h).to match(hash_including(login: login_error))
           expect(subject.errors).to match_array(errors)
           expect(subject.attribute_errors).to match(attribute_errors)
           expect(subject.attribute_messages).to match(attribute_messages)

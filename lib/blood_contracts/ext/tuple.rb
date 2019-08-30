@@ -21,7 +21,7 @@ module BloodContracts::Core
       #
       def failure(*, **)
         @context[:sub_scope] = self.class.name
-        @context[:attributes].store(:base, super)
+        super
       end
     end
   end
