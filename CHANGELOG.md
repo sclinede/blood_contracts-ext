@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.1.4] - [2018-08-30]
+
+### Fixes
+Fix support of blood_contracts-core v0.4.4
+The context is now duplicated for each validation in Sum or Tuple composition
+
 ## [0.1.3] - [2018-07-12]
 
 ### Fixes
